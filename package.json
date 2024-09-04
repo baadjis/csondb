@@ -1,0 +1,18 @@
+{
+  "name": "@baadjis/csondb",
+  "version": "1.0.0",
+  "description": "a simple package for using like NoSQL database",
+  "main":"dist/index.js",
+  "files":["src/","Readme.md"],
+  
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build":"tsup ./src"
+  },
+  "keywords": [
+    "json",
+    "database"
+  ],
+  "author": "baadjis",
+  "license": "ISC"
+}

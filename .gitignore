@@ -1,0 +1,13 @@
+# Nodejs
+node_modules
+
+#dist
+dist
+
+# Logs
+logs
+*.log 
+npm-debug.log*
+
+# Environment variables
+.env* 
