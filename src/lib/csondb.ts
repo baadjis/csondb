@@ -37,9 +37,9 @@ class Collection{
     /**
      * find all data from the collection
      * @param {OptionType} options : options to apply
-     * @returns {any[]|undefined}:list of data or undefined if some errors occured
+     * @returns {any[]|Error}:list of data or Error if some errors occured
      */
-    find(options?:OptionType): any[] | undefined{
+    find(options?:OptionType): any[] | Error{
         let data =readJson(this.path)
         return applyOptions(data,options)
     }
@@ -108,9 +108,9 @@ class Collection{
      * find a list of items from the collection verifying a condition
      * @param {any} condition: the filter condition
      * @param {OptionType} options: the options to apply after querying
-     * @returns {any[]|undefined}: list of items or undefined if some errors occured
+     * @returns {any[]|undefined}: list of items or Error if some errors occured
      */
-    findMany(condition:any,options?:OptionType): any[]|undefined{
+    findMany(condition:any,options?:OptionType): any[]|Error{
         const data =readJson(this.path)||[]
         let res=findManyWithConditon(data,condition)
         return  applyOptions(res,options)
@@ -347,9 +347,9 @@ class Model {
     /**
      * find all data from the collection
      * @param {OptionType} options : options to apply
-     * @returns {any[]|undefined}:list of data or undefined if some errors occured
+     * @returns {any[]|Error}:list of data or undefined if some errors occured
      */
-    find(options?:OptionType): any[] | undefined{
+    find(options?:OptionType): any[] | Error{
         return this.colletion.find(options)
     }
 

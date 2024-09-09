@@ -16,12 +16,22 @@ const KeyWords=[
  */
 export const isKeyWord=(key:string):boolean=>KeyWords.includes(key);
 /**
+ * chek if variable is an Error's instance
+ * @param err 
+ * @returns {boolean}
+ */
+export const isError = (err: unknown): err is Error => err instanceof Error;
+
+
+/**
  * apply operation to data and resturn true or false given 
  * @param x {any}:data to test
  * @param op {string}: the operation
  * @param y {any}:the value to run operation on
  * @returns {boolean} :the test result
  */
+
+
 const applyOperator=(x:any,op:string,y:any):boolean=>{
     switch(op){
         case '$lt': return  x<y
@@ -41,18 +51,19 @@ const applyOperator=(x:any,op:string,y:any):boolean=>{
  * @param {any} condition : the filter criteria dictionnary
  * @returns {any}: the test result
  */
-export const applyFilter=(data:any,condition:any):boolean=>{
+export const applyFilter=(data:any,condition:any):boolean|Error=>{
     let test=true ;
     for (let key  of Object.keys(condition)){
         if (key=='$or'){
             if (!Array.isArray(condition[key])){
-                console.error('$or operator should be followed by error')
-                return false
+            
+                return Error('$or operator should be followed by error')
             }else{
                 let res=false
                 for (let k of condition[key]){
-            
-                res= res|| applyFilter(data,k)
+                  let appfilter=applyFilter(data,k)
+                  if (isError(appfilter) )return appfilter
+                  res= res|| appfilter
                 }
                 test=test && res
 
@@ -90,7 +101,7 @@ export const findIndexWithCondition=(data:any[],condition:any): number=>{
  * @param {any} condition :the condition dictionnary
  * @returns {any[]}: the list of items
  */
-export const findManyWithConditon=(data:any[],condition:any)=>{
+export const findManyWithConditon=(data:any[],condition:any): any[]=>{
     return data.filter(
 
         (item:any)=>applyFilter(item,condition)
@@ -113,9 +124,9 @@ export const updateDict=(dict:any,newData:any)=>{
  * aply options after querying data (eg: sort ,apply limit ,skip)
  * @param {any[]} data: the list of data
  * @param {OptionType} options :options to apply
- * @returns {any[]|undefined}:list of data after applying options or undefined if somme errors occured
+ * @returns {any[]|Error}:list of data after applying options or Error if somme errors occured
  */
-export const applyOptions=(data:any[],options?:OptionType): any[]|undefined=>{
+export const applyOptions=(data:any[],options?:OptionType): any[]|Error=>{
 
     let start=0;
     let limit=data.length;
@@ -129,13 +140,13 @@ export const applyOptions=(data:any[],options?:OptionType): any[]|undefined=>{
         for(let key of sortKeys){
           
           if (! dataKeys.includes(key)){
-              console.error(`key ${key} is not in data`)
-              return
+    
+              return Error(`key ${key} is not in data`)
           }
           
           if (options.sort[key]!==1 && options.sort[key]!==1 ){
-              console.error(`sort value should be 1 or -1`)
-              return
+            
+              return Error(`sort value should be 1 or -1`)
           }
           let keyvalue=options.sort[key]
           data.sort((a,b)=>a[key]>b[key] ? keyvalue:-keyvalue)
