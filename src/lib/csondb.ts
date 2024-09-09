@@ -1,10 +1,18 @@
 import fs from 'fs'
-import { readJson, writeJson, updateJson, findIndexWithCondition, updateDict, updateJsonWithArray, applyOptions, isKeyWord, findManyWithConditon ,applyFilter} from './utils'
+import { findIndexWithCondition, updateDict, applyOptions, isKeyWord, findManyWithConditon ,applyFilter} from './utils/data'
+import { readJson, writeJson, updateJson, updateJsonWithArray} from './utils/files'
+
 import { OptionType } from './types'
 
-
+/**
+ * Collection class
+ */
 class Collection{
     path: string
+    /**
+     * create a collection given the collection name
+     * @param {string} path :collection name
+     */
     constructor(path:string){
         this.path=path
     }
@@ -162,10 +170,16 @@ class Collection{
         return results
     }
 }
-
+/**
+ * schema class 
+ */
 class Schema{
     timestamps: boolean
     description: any
+    /**
+     * create a schema  with  fields definitions
+     * @param description 
+     */
     constructor(description:any){
         this.description=description
         this.timestamps=false
@@ -174,10 +188,17 @@ class Schema{
         this.timestamps=value
     }
 }
-
+/**
+ * class for creating models
+ */
 class Model {
     colletion: Collection
     schema: Schema
+    /**
+     * create model given the collection and the schema
+     * @param {Collection} colletion : the model collection
+     * @param {Schema} schema : the model schema
+     */
     constructor(colletion:Collection,schema:Schema){
         this.colletion=colletion
         this.schema=schema
