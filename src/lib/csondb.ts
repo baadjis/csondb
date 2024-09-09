@@ -445,7 +445,7 @@ class Model {
  * @param {Schema}schema :the schema
  * @returns {Model}:created model
  */
-const createModel=(name:string,schema:Schema)=>{
+const createModel=(name:string,schema:Schema): Model=>{
 
     const dir=process.cwd()+'/csondb/data/'
     const path =dir+name+'.json'
