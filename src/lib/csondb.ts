@@ -142,7 +142,13 @@ class Collection{
         }
         return results
     }
-    
+    /**
+     * delete all elements from a collection
+     
+     */
+    delete(){
+        writeJson([],this.path)
+    }
     /**
      * delete a list of items from the collection verifying a condition
      * @param {any} condition: the filter condition
@@ -422,6 +428,14 @@ class Model {
     deleteMany(condition:any): any[] | undefined|Error{
         if(!this.validateCondition(condition)) return Error('Invalid condition');
         return this.colletion.deleteMany(condition)
+    }
+
+    /**
+     * delete all elements from a collection
+     
+     */
+    delete(){
+        this.colletion.delete()
     }
 
 }
