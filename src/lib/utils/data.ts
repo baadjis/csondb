@@ -32,16 +32,16 @@ export const isError = (err: unknown): err is Error => err instanceof Error;
  */
 
 
-const applyOperator=(x:any,op:string,y:any):boolean=>{
+const applyOperator=(x:any,op:string,y:any):boolean|Error=>{
     switch(op){
         case '$lt': return  x<y
         case '$gt':return  x>y
         case '$lte': return x<=y
         case '$gte':return x>=y
-        case '$isin': if(!Array.isArray(y)){console.error('$isin should be followed by array')
-             return false } return y.includes(x)
-        default:console.error('unknown operator') 
-        return false
+        case '$isin': return (!Array.isArray(y))?Error('$isin should be followed by array')
+             : y.includes(x)
+        default: return Error('unknown operator') 
+
     }
 
 }
@@ -70,13 +70,29 @@ export const applyFilter=(data:any,condition:any):boolean|Error=>{
             }
         }else if( Object.keys(data).includes(key)){
             if(typeof condition[key]=='object'){
-                   let cond=condition[key]  
-                   const op =Object.keys(cond)[0]
-                   test =test && applyOperator(data[key],op,cond[op])
+                const cond=condition[key]  
+                const op =Object.keys(cond)[0]
+                if (isKeyWord(op)){
+                    
+                    const appOperator=applyOperator(data[key],op,cond[op])
+                    if (isError(appOperator)) return appOperator
+                    test =test && appOperator
+                }else{
+                  
+                  const appfilter2=applyFilter(data[key],condition[key])
+                  if (isError(appfilter2) )return appfilter2
+                
+                  test=test && appfilter2
+                }
+                   
             }else{
-             test= test && (data[key]==condition[key])
+             
+             test= test && data[key]===condition[key]
            }
 
+
+        }else{
+            return false
         }
 
     }
