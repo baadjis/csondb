@@ -119,7 +119,7 @@ export const findIndexWithCondition=(data:any[],condition:any): number=>{
  */
 export const findManyWithConditon=(data:any[],condition:any): any[]=>{
     return data.filter(
-
+        
         (item:any)=>applyFilter(item,condition)
     )
 }
@@ -143,7 +143,13 @@ export const updateDict=(dict:any,newData:any)=>{
  * @returns {any[]|Error}:list of data after applying options or Error if somme errors occured
  */
 export const applyOptions=(data:any[],options?:OptionType): any[]|Error=>{
-
+    const OptionsKeyWords=['limit','skip','sort'];
+    if (options){
+        for (let k of Object.keys(options)){
+            if(!OptionsKeyWords.includes(k)) return Error(`unknown options keyword ${k}`)
+        }
+    }
+    
     let start=0;
     let limit=data.length;
     if (options?.sort){
@@ -179,7 +185,7 @@ export const applyOptions=(data:any[],options?:OptionType): any[]|Error=>{
     if (options?.limit){
        limit=options.limit
     }
-    data= data.slice(start,limit+start)
+    data = data.slice(start,limit+start)
 
     return data
 }
