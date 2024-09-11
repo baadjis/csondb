@@ -171,7 +171,7 @@ export const applyOptions=(data:any[],options?:OptionType): any[]|Error=>{
               return Error(`sort value should be 1 or -1`)
           }
           let keyvalue=options.sort[key]
-          data.sort((a,b)=>a[key]>b[key] ? keyvalue:-keyvalue)
+          data.sort((a,b)=>a[key]>b[key] ? keyvalue:(a[key]===b[key]?0:-keyvalue))
   
         }
       }
