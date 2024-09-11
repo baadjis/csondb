@@ -6,8 +6,8 @@ import crypto from 'crypto';
  * @param {string} dataPath :the path to the json file
  * @returns {any[]} array of a parsed json data
  */
-export const readJson=(dataPath:string):any[]=>{
-   
+export const readJson=(dataPath:string):any[]|Error=>{
+    if(!fs.existsSync(dataPath)) return Error('No such file')
     const rawData = fs.readFileSync(dataPath);
     
     try{
@@ -54,7 +54,7 @@ export const updateJson=(newData:any,dataPath:string,timestamps:boolean=false): 
     
     let datar=addIdToData(newData,timestamps)
     let data:any[] =[]
-    if(fs.existsSync(dataPath)) data=readJson(dataPath)
+    if(fs.existsSync(dataPath)) data=readJson(dataPath) as any[]
     
     data.push(datar)
 
@@ -73,7 +73,7 @@ export const updateJson=(newData:any,dataPath:string,timestamps:boolean=false): 
 export const updateJsonWithArray=(newData:any[],dataPath:string,timestamps:boolean=false): any[]=>{
     
     let data:any[] =[]
-    if(fs.existsSync(dataPath)) data=readJson(dataPath)
+    if(fs.existsSync(dataPath)) data=readJson(dataPath) as any[]
     let datar=newData.map((item)=>{
         const itemWithId=addIdToData(item,timestamps)
         data.push(itemWithId)
