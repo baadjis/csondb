@@ -1,0 +1,15 @@
+{
+  "extension": [
+    "ts","js"
+  ],
+  "loader":"ts-node/esm",
+  "spec": ["test/**/*.spec.*"],
+  "require": [
+    "jsdom-global/register",
+    "ts-node/register",
+    "source-map-support/register",
+    "chai/register-expect.js"
+  ],
+  "watch-files":["src"],
+  "recursive": true
+}

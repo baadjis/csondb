@@ -32,7 +32,7 @@ export const isError = (err: unknown): err is Error => err instanceof Error;
  */
 
 
-const applyOperator=(x:any,op:string,y:any):boolean|Error=>{
+export const applyOperator=(x:any,op:string,y:any):boolean|Error=>{
     switch(op){
         case '$lt': return  x<y
         case '$gt':return  x>y

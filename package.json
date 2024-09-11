@@ -2,17 +2,30 @@
   "name": "@baadjis/csondb",
   "version": "1.0.0",
   "description": "a simple package for using like NoSQL database",
-  "main":"dist/index.js",
-  "files":["src/","Readme.md"],
-  
+  "main": "dist/index.js",
+  "files": [
+    "src/",
+    "Readme.md"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"tsup ./src"
+    "test": "mocha --require ts-node/register --extensions ts,tx --watch --watch-files src 'test/**/*.spec.ts'",
+    "build": "tsup ./src"
   },
   "keywords": [
     "json",
     "database"
   ],
   "author": "baadjis",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.3.19",
+    "@types/mocha": "^10.0.7",
+    "chai": "^4.2.0",
+    "cross-env": "^7.0.3",
+    "mocha": "^10.7.3"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.2",
+    "tsup": "^8.2.4"
+  }
 }
