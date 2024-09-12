@@ -1,7 +1,7 @@
 {
   "name": "@baadjis/csondb",
   "version": "1.0.0",
-  "description": "a simple package for using like NoSQL database",
+  "description": "a simple package for interacting with json files like a NoSQL database",
   "main": "dist/index.js",
   "files": [
     "src/",
