@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { findIndexWithCondition, updateDict, applyOptions, isKeyWord, findManyWithConditon ,applyFilter} from './utils/data'
+import { findIndexWithCondition, updateDict, applyOptions, isKeyWord, findManyWithConditon ,applyFilter, isError} from './utils/data'
 import { readJson, writeJson, updateJson, updateJsonWithArray} from './utils/files'
 
 import { OptionType } from './types'
@@ -41,17 +41,19 @@ class Collection{
      */
     find(options?:OptionType): any[] | Error{
         let data =readJson(this.path)
+        if (isError(data)) return data
         return applyOptions(data,options)
     }
 
      /**
      * find first item from the collection verifying a condition
      * @param {any} condition: the filter condition
-     * @returns {any|undefined}: data or undefined if some errors occured
+     * @returns {any|Error}: data or undefined if some errors occured
      */
-    findOne(condition:any): any | undefined{
+    findOne(condition:any): any | Error{
 
-        const data =readJson(this.path)||[]
+        const data =readJson(this.path)
+        if (isError(data)) return data; 
         let res=findIndexWithCondition(data,condition)
         if (res==-1) return Error('Not Found')
 
@@ -66,7 +68,7 @@ class Collection{
     deleteOne(condition:any): number | Error{
 
         let data =readJson(this.path)||[]
-
+        if(isError(data)) return data
         let res=findIndexWithCondition(data,condition)
         if (res==-1) return Error('Not Found')
 
@@ -77,9 +79,9 @@ class Collection{
     /**
      * find element by id from the collection
      * @param {string} id: the id to find 
-     * @returns {any|undefined}:return the item or undefined if not find
+     * @returns {any|Error}:return the item or undefined if not find
      */
-    findById(id:string): any | undefined{
+    findById(id:string): any | Error{
 
         return this.findOne({id})
     }
@@ -87,11 +89,12 @@ class Collection{
      * find first item from the collection verifying a condition and update it
      * @param {any} condition: the filter condition
      * @param {any} newData : new data for updating
-     * @returns {any|undefined}: data or undefined if some errors occured
+     * @returns {any|Error}: data or undefined if some errors occured
      */
-    findOneAndUpdate(condition:any,newData:any): any | undefined{
+    findOneAndUpdate(condition:any,newData:any): any | Error{
 
-        const data =readJson(this.path)||[]
+        const data =readJson(this.path)
+        if (isError(data)) return data
 
         let res=findIndexWithCondition(data,condition)
         
@@ -108,22 +111,26 @@ class Collection{
      * find a list of items from the collection verifying a condition
      * @param {any} condition: the filter condition
      * @param {OptionType} options: the options to apply after querying
-     * @returns {any[]|undefined}: list of items or Error if some errors occured
+     * @returns {any[]|Error}: list of items or Error if some errors occured
      */
     findMany(condition:any,options?:OptionType): any[]|Error{
-        const data =readJson(this.path)||[]
-        let res=findManyWithConditon(data,condition)
-        return  applyOptions(res,options)
+            
+            const data =readJson(this.path) ;
+            if (isError(data)) return data;
+            let res=findManyWithConditon(data,condition)
+            return  applyOptions(res,options)
+       
     }
     
     /**
      * find list of items from the collection verifying a condition annd update
      * @param {any} condition: the filter condition
      * @param {any} newData : new data for updating
-     * @returns {any[]|undefined}: list of modified items or undefined if some errors occured
+     * @returns {any[]|Error}: list of modified items or undefined if some errors occured
      */
-    findManyAndUpdate(condition:any,newData:any): any[] | undefined{
-        let data =readJson(this.path)||[]
+    findManyAndUpdate(condition:any,newData:any): any[] | Error{
+        let data =readJson(this.path)
+        if(isError(data)) return data;
         let results:any[]=[]
         data.forEach(
             (item:any)=>{
@@ -152,10 +159,11 @@ class Collection{
     /**
      * delete a list of items from the collection verifying a condition
      * @param {any} condition: the filter condition
-     * @returns {any[]|undefined}: list of deleted items or undefined if some errors occured
+     * @returns {any[]|Error}: list of deleted items or undefined if some errors occured
      */
-    deleteMany(condition:any): any[] | undefined{
+    deleteMany(condition:any): any[] | Error{
         let data =readJson(this.path)||[]
+        if(isError(data)) return data;
         let results:any[]=[]
         data.forEach(
             (item:any)=>{
