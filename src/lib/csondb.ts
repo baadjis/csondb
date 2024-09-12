@@ -371,9 +371,9 @@ class Model {
       /**
      * find first item from the collection verifying a condition
      * @param {any} condition: the filter condition
-     * @returns {any|undefined}: data or undefined if some errors occured
+     * @returns {any|Error}: data or undefined if some errors occured
      */
-    findOne(condition:any): any | undefined{
+    findOne(condition:any): any | Error{
         if(!this.validateCondition(condition)) return Error('Invalid condition')
 
         return this.colletion.findOne(condition)
@@ -381,9 +381,9 @@ class Model {
     /**
      * find elemnt by id 
      * @param {string} id :the id
-     * @returns {any} :the found item
+     * @returns {any|Error} :the found item
      */
-    findById(id:string): any{
+    findById(id:string): any|Error{
         return this.colletion.findById(id)
     }
 
@@ -408,9 +408,9 @@ class Model {
      * find list of items from the collection verifying a condition and update 
      * @param {any} condition: the filter condition
      * @param {any} newData: the new data for updating
-     * @returns {any[]|undefined|Error}:  list of updated items or error if some errors occured
+     * @returns {any[]|Error}:  list of updated items or error if some errors occured
      */
-    findManyAndUpdate(condition:any,newData:any): any[] | undefined|Error{
+    findManyAndUpdate(condition:any,newData:any): any[] |Error{
 
         if(!this.validateCondition(condition)) return Error('Invalid condition');
         if(!this.validateCondition(newData)) return Error('Invalid new Data entries');
@@ -431,9 +431,9 @@ class Model {
     /**
      * delete list of items from the collection verifying a condition
      * @param {any} condition: the filter condition
-     * @returns {any[]|undefined|Error}:  list index or error if some errors occured
+     * @returns {any[]|Error}:  list index or error if some errors occured
      */
-    deleteMany(condition:any): any[] | undefined|Error{
+    deleteMany(condition:any): any[] |Error{
         if(!this.validateCondition(condition)) return Error('Invalid condition');
         return this.colletion.deleteMany(condition)
     }
