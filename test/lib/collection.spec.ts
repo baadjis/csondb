@@ -9,7 +9,7 @@ describe('Collection test one',()=>{
     const data={firstname:'cnd',
         lastname:'baadji',
         address:{
-        rue:'18 rue liné',
+        rue:'18 rue linéa',
         codepostal:'75005'
         }
        }
@@ -78,21 +78,21 @@ describe('Collection test many',()=>{
     const data=[{firstname:'cnd',
         lastname:'baadji',
         address:{
-        rue:'18 rue liné',
+        rue:'18 rue linéa',
         codepostal:'75005'
         }
        },
        {firstname:'cnd1',
         lastname:'baadjic',
         address:{
-        rue:'18 rue liné',
+        rue:'18 rue linéb',
         codepostal:'75005'
         }
        },
        {firstname:'cnd2',
         lastname:'baadjis',
         address:{
-        rue:'18 rue liné',
+        rue:'18 rue linéb',
         codepostal:'75005'
         }
        },

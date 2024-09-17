@@ -39,7 +39,7 @@ describe('apply operator test',()=>{
 
 describe('apply filter test',()=>{
     const data={firstname:'cnd',lastname:'baadji',address:{
-        rue:'18 rue liné',codepostal:'75005'
+        rue:'18 rue linéa',codepostal:'75005'
     }}
     it('should return true',()=>{
          const val=applyFilter(data,{$or:[{firstname:'cnd'},{lastname:'baadjis'}]});
@@ -71,7 +71,7 @@ describe('find index with condition test',()=>{
         {firstname:'cnd',
             lastname:'baadji',
             address:{
-            rue:'18 rue liné',
+            rue:'18 rue linéa',
             codepostal:'75005'
           }
         }
@@ -80,7 +80,7 @@ describe('find index with condition test',()=>{
           firstname:'cnd1',
           lastname:'baadjis',
             address:{
-            rue:'18 rue liné',
+            rue:'18 rue linéb',
             codepostal:'75005'
            }
         }
@@ -109,7 +109,7 @@ describe('find many with condition',()=>{
         {firstname:'cnd',
             lastname:'baadji',
             address:{
-            rue:'18 rue liné',
+            rue:'18 rue linéa',
             codepostal:'75005'
           }
         }
@@ -118,7 +118,7 @@ describe('find many with condition',()=>{
           firstname:'cnd1',
           lastname:'baadjis',
             address:{
-            rue:'18 rue liné',
+            rue:'18 rue linéb',
             codepostal:'75005'
            }
         }
@@ -134,7 +134,7 @@ describe('apply options test',()=>{
         {firstname:'cnd',
             lastname:'baadji',
             address:{
-            rue:'18 rue liné',
+            rue:'18 rue linéa',
             codepostal:'75005'
           }
         }
@@ -143,7 +143,7 @@ describe('apply options test',()=>{
           firstname:'cnd1',
           lastname:'baadjis',
             address:{
-            rue:'18 rue liné',
+            rue:'18 rue linéb',
             codepostal:'75005'
            }
         }

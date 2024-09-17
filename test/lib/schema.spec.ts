@@ -62,14 +62,14 @@ describe('Test isRequired',()=>{
     const data={firstname:'cnd',
         lastname:'baadji',
         address:{
-        rue:'18 rue liné',
+        rue:'18 rue linéa',
         codepostal:'75005'
         }
        }
        const data2={firstname:'cnd',
     
         address:{
-        rue:'18 rue liné',
+        rue:'18 rue linéb',
         codepostal:'75005'
         }
        }
@@ -110,14 +110,14 @@ describe('Test checkType',()=>{
     const data={firstname:'cnd',
         lastname:'baadji',
         address:{
-        rue:'18 rue liné',
+        rue:'18 rue linéa',
         codepostal:'75005'
         }
        }
        const data2={firstname:'cnd',
         lastname:123,
         address:{
-        rue:'18 rue liné',
+        rue:'18 rue linéb',
         codepostal:'75005'
         }
        }
@@ -156,7 +156,7 @@ describe('Test validateData',()=>{
     const data={firstname:'cnd',
         lastname:'baadji',
         address:{
-        rue:'18 rue liné',
+        rue:'18 rue linéa',
         codepostal:75005
         }
        }
@@ -169,7 +169,7 @@ describe('Test validateData',()=>{
         firstname:'cnd',
         lastname:'baadji',
         address:{
-        rue:'18 rue liné'
+        rue:'18 rue linéb'
         }
     }
     it('shoul return true',()=>{

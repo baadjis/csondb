@@ -34,10 +34,10 @@ describe('writeJson test',()=>{
 
 describe('updateJson test',()=>{
     const data={firstname:'cnd',lastname:'baadji',address:{
-        rue:'18 rue liné',codepostal:'75005'
+        rue:'18 rue linéa',codepostal:'75005'
     }}
     const data1={firstname:'cnd1',lastname:'baadjis',address:{
-        rue:'18 rue liné',codepostal:'75005'
+        rue:'18 rue linéb',codepostal:'75005'
     }}
     
   it('should return true',()=>{
@@ -56,10 +56,10 @@ describe('updateJson test',()=>{
 
 describe('updateJsonWithArray test',()=>{
     const data=[{firstname:'cnd',lastname:'baadji',address:{
-        rue:'18 rue liné',codepostal:'75005'
+        rue:'18 rue linéa',codepostal:'75005'
     }}
     ,{firstname:'cnd1',lastname:'baadjis',address:{
-        rue:'18 rue liné',codepostal:'75005'
+        rue:'18 rue linéb',codepostal:'75005'
     }}]
     
   it('should return true',()=>{
