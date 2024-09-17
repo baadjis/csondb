@@ -24,6 +24,9 @@ describe('writeJson test',()=>{
     it('should return true',()=>{
         const datar=writeJson(data, __dirname+'/test.json')
         const result=fs.existsSync(__dirname+'/test.json')
+        //delete file after the test
+        fs.unlinkSync(__dirname+'/test.json')
+        
         expect(result).to.be.true
     })
     
@@ -47,6 +50,7 @@ describe('updateJson test',()=>{
       //compare legth after update
       expect(res&&(res2.length>res1.length)).to.be.true
   })
+ 
 
 })
 
@@ -63,10 +67,12 @@ describe('updateJsonWithArray test',()=>{
       const datar=updateJsonWithArray(data,__dirname+'/test2.json',true);
       //after update with many
       const res1=readJson(__dirname+'/test2.json') as any[]
+    // delete file after test
+      fs.unlinkSync(__dirname+'/test2.json')
 
-      
       // compare length
       expect(res.length<res1.length).to.be.true
   })
+
 
 })
