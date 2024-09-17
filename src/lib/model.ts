@@ -24,9 +24,9 @@ export class Model {
      /**
      * insert an element to the collection
      * @param {any} data : the new element
-     * @returns {any}:added data
+     * @returns {any|Error}:added data
      */
-    create(data:any): any{
+    create(data:any): any|Error{
         if (!validateData(data,this.schema)) return Error('Ivalide data for schema')
         
         return this.colletion.create(data,this.schema.timestamps)
@@ -49,7 +49,7 @@ export class Model {
     /**
      * find all data from the collection
      * @param {OptionType} options : options to apply
-     * @returns {any[]|Error}:list of data or undefined if some errors occured
+     * @returns {any[]|Error}:list of data or Error if some errors occured
      */
     find(options?:OptionType): any[] | Error{
         return this.colletion.find(options)
@@ -80,7 +80,7 @@ export class Model {
     /**
      * find elemnt by id 
      * @param {string} id :the id
-     * @returns {any|Error} :the found item
+     * @returns {any|Error} :the found item or Error
      */
     findById(id:string): any|Error{
         return this.colletion.findById(id)
@@ -121,7 +121,7 @@ export class Model {
      /**
      * delete first item from the collection verifying a condition
      * @param {any} condition: the filter condition
-     * @returns {number|Error}:  index or error if some errors occured
+     * @returns {number|Error}:  index of deleted data or error if some errors occured
      */
     deleteOne(condition:any): number | Error{
         if(!validateCondition(condition,this.schema)) return Error('Invalid condition');
@@ -130,7 +130,7 @@ export class Model {
     /**
      * delete list of items from the collection verifying a condition
      * @param {any} condition: the filter condition
-     * @returns {any[]|Error}:  list index or error if some errors occured
+     * @returns {any[]|Error}:  list of deleted data indexes or error if some errors occured
      */
     deleteMany(condition:any): any[] |Error{
         if(!validateCondition(condition,this.schema)) return Error('Invalid condition');

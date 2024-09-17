@@ -29,6 +29,7 @@ export const readJson=(dataPath:string):any[]|Error=>{
 export const writeJson=(data:any,dataPath:string)=>{
     let rawData=JSON.stringify(data,null,4)
     fs.writeFileSync(dataPath,rawData);
+    
 }
 /**
  * add id and timestamps(if necessary) to data before writing to json file

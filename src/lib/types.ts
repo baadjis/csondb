@@ -1,6 +1,6 @@
 export type CompareFn<T>=(a:T,b:T)=>number;
 interface Dictionary<T> {
-    [key:string]:T
+    [key:string]:T 
 }
 export type OptionType={
     limit?:number,

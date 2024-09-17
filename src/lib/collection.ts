@@ -48,7 +48,7 @@ export class Collection{
      /**
      * find first item from the collection verifying a condition
      * @param {any} condition: the filter condition
-     * @returns {any|Error}: data or undefined if some errors occured
+     * @returns {any|Error}: data or Error if some errors occured
      */
     findOne(condition:any): any | Error{
 
@@ -79,7 +79,7 @@ export class Collection{
     /**
      * find element by id from the collection
      * @param {string} id: the id to find 
-     * @returns {any|Error}:return the item or undefined if not find
+     * @returns {any|Error}:return the item or Error if not find
      */
     findById(id:string): any | Error{
 
@@ -89,7 +89,7 @@ export class Collection{
      * find first item from the collection verifying a condition and update it
      * @param {any} condition: the filter condition
      * @param {any} newData : new data for updating
-     * @returns {any|Error}: data or undefined if some errors occured
+     * @returns {any|Error}: data or Error if some errors occured
      */
     findOneAndUpdate(condition:any,newData:any): any | Error{
 
@@ -126,7 +126,7 @@ export class Collection{
      * find list of items from the collection verifying a condition annd update
      * @param {any} condition: the filter condition
      * @param {any} newData : new data for updating
-     * @returns {any[]|Error}: list of modified items or undefined if some errors occured
+     * @returns {any[]|Error}: list of modified items or Error if some errors occured
      */
     findManyAndUpdate(condition:any,newData:any): any[] | Error{
         let data =readJson(this.path)
@@ -159,7 +159,7 @@ export class Collection{
     /**
      * delete a list of items from the collection verifying a condition
      * @param {any} condition: the filter condition
-     * @returns {any[]|Error}: list of deleted items or undefined if some errors occured
+     * @returns {any[]|Error}: list of deleted items or Error if some errors occured
      */
     deleteMany(condition:any): any[] | Error{
         let data =readJson(this.path)||[]
