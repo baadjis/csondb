@@ -119,7 +119,7 @@ const Person=createModel('testschema',TestSchema);
     const val=Person.findOneAndUpdate({firstname:'cnd'},{lasstname:'baadjic'})
     const val1=Person.findOne({firstname:'cnd'})
     //check lastname changed
-    const test = val['lastname']==='baadjic'
+    const test = val1['lastname']==='baadjic'
     expect(test).to.be.throw
    })
    //test deleteOne
