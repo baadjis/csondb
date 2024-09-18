@@ -2,7 +2,7 @@ import { SourceMap } from "module";
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-    target:'es2016',
+    target:'es2020',
     format:['cjs','esm'],
     splitting:false,
     sourcemap:true,
