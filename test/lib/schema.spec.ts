@@ -1,7 +1,54 @@
 import fs from 'fs';
 import {expect} from 'chai';
-import { checkIsRequired, checkType, isInSchema, isRequired, Schema, validateCondition, validateData } from '../../src/lib/schema';
+import { addDefault, checkIsRequired, checkType, isInSchema, isRequired, Schema, validateCondition, validateData } from '../../src/lib/schema';
 
+describe('Test add default',()=>{
+    const accountSchema = new Schema({
+        firstname:{
+            type:String,
+            required:true
+        },
+        amount:{type:Number,
+            default:0
+        }
+
+    
+    })
+    let data:any={firstname:'cnd'};
+    it('should return true',()=>{
+        addDefault(data,accountSchema.description);
+        const test=data['amount']===0;
+        expect(test).to.be.true
+
+    })
+    
+
+})
+
+describe('Test validator',()=>{
+    const accountSchema = new Schema({
+        firstname:{
+            type:String,
+            required:true
+        },
+        amount:{type:Number,
+            validator:(x:number)=> (x>=0 && x<1000)
+        }
+
+    
+    })
+    let data:any={firstname:'cnd',
+        amount:1500
+    };
+    it('should return false',()=>{
+        
+        const test=validateData(data,accountSchema);
+        expect(test).to.be.false
+
+    })
+    
+
+})
 describe('Test isInSchema',()=>{
 
     const personSchema = new Schema({
@@ -237,3 +284,4 @@ describe('Test validateCondition',()=>{
         expect(val).to.be.true
     })
 })
+
