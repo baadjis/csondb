@@ -37,7 +37,7 @@ export const writeJson=(data:any,dataPath:string)=>{
  * @param {boolean}timestamps : boolean param allowing to add or not timestamps 
  * @returns {any}: the modified data
  */
-const addIdToData=(data:any,timestamps:boolean=false): any=>{
+const preInsertData=(data:any,timestamps:boolean=false): any=>{
     let newData={id:crypto.randomUUID(),...data};
     if (timestamps) newData={createdAt:new Date(),...newData}
     return newData
@@ -53,7 +53,7 @@ const addIdToData=(data:any,timestamps:boolean=false): any=>{
 
 export const updateJson=(newData:any,dataPath:string,timestamps:boolean=false): any=>{
     
-    let datar=addIdToData(newData,timestamps)
+    let datar=preInsertData(newData,timestamps)
     let data:any[] =[]
     if(fs.existsSync(dataPath)) data=readJson(dataPath) as any[]
     
@@ -76,7 +76,7 @@ export const updateJsonWithArray=(newData:any[],dataPath:string,timestamps:boole
     let data:any[] =[]
     if(fs.existsSync(dataPath)) data=readJson(dataPath) as any[]
     let datar=newData.map((item)=>{
-        const itemWithId=addIdToData(item,timestamps)
+        const itemWithId=preInsertData(item,timestamps)
         data.push(itemWithId)
         return itemWithId
     })
