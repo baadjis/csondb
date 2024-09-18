@@ -298,7 +298,7 @@ A condition is a logical operation or combinaison of many logical operations.
 
 * OR:
 
- The Or operation is followed by array of conditions:
+ The Or operation is followed by an array of conditions:
 
 ```javavascript 
 
@@ -310,10 +310,10 @@ firstname == 'cnd' || lastname == 'baadjis' => {$or: [{firstname:'cnd'},      {l
 
 * Is in :
 
-Check if a key is in a list of elements
+Check if a key value is in a list of elements
 
 ```javascript 
-  ['cnd','cnd2'].includes(firstname) => {firstname: {$isin:['cnd','cnd1']}
+  ['cnd','cnd2'].includes(firstname) => {firstname: {$isin:['cnd','cnd2']}
   }
 
 ```
