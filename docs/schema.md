@@ -18,6 +18,8 @@
     *   [Parameters][14]
 *   [validateCondition][15]
     *   [Parameters][16]
+*   [addDefault][17]
+    *   [Parameters][18]
 
 ## Schema
 
@@ -25,7 +27,7 @@ schema class
 
 ### Parameters
 
-*   `description` **any**&#x20;
+*   `description` **DescriptorType**&#x20;
 
 ## isInSchema
 
@@ -33,10 +35,10 @@ check if a key is defined in the schemas
 
 ### Parameters
 
-*   `key` **[string][17]** :the key to check
+*   `key` **[string][19]** :the key to check
 *   `description` **any** :the schemas description
 
-Returns **[boolean][18]** :result of the test
+Returns **[boolean][20]** :result of the test
 
 ## isRequired
 
@@ -45,9 +47,9 @@ check if key is required
 ### Parameters
 
 *   `description` **any** :the schema description
-*   `key` **[string][17]** {string} : the key description
+*   `key` **[string][19]** {string} : the key description
 
-Returns **[boolean][18]**&#x20;
+Returns **[boolean][20]**&#x20;
 
 ## checkIsRequired
 
@@ -58,7 +60,7 @@ check if a key in data  is required from the schemas description
 *   `data` **any** :the dictionnary containing the key
 *   `description` **any** :the schemas description
 
-Returns **[boolean][18]** :result of the test
+Returns **[boolean][20]** :result of the test
 
 ## checkType
 
@@ -67,10 +69,10 @@ check if a key in data  has the same type defined required from the schemas desc
 ### Parameters
 
 *   `data` **any**&#x20;
-*   `key` **[string][17]** :the key to check
+*   `key` **[string][19]** :the key to check
 *   `description` **any** :the schemas description
 
-Returns **[boolean][18]** :result of the test
+Returns **[boolean][20]** :result of the test
 
 ## isValidKey
 
@@ -79,10 +81,10 @@ check if a key from data is valid regarding  schema description
 ### Parameters
 
 *   `data` **any** {any}: the data to add
-*   `description` **any** {any}: the schema description
-*   `key` **[string][17]** {string}:the key to check
+*   `description` **DescriptorType** {any}: the schema description
+*   `key` **[string][19]** {string}:the key to check
 
-Returns **[boolean][18]** :
+Returns **[boolean][20]** :
 
 ## validateData
 
@@ -93,7 +95,7 @@ check if data is valid given the schemas
 *   `data` **any** :the data to check
 *   `schema` **[Schema][1]**&#x20;
 
-Returns **[boolean][18]** : the result of the test
+Returns **[boolean][20]** : the result of the test
 
 ## validateCondition
 
@@ -104,7 +106,18 @@ check if condition is valid given the schemas(eg: all keys are in the schemas an
 *   `condition` **any** :the data to check
 *   `schema` **[Schema][1]**&#x20;
 
-Returns **[boolean][18]** : the result of the test
+Returns **[boolean][20]** : the result of the test
+
+## addDefault
+
+add default values to data if missing
+
+### Parameters
+
+*   `data` **any**&#x20;
+*   `descriptor` **DescriptorType**&#x20;
+
+Returns **any**&#x20;
 
 [1]: #schema
 
@@ -138,6 +151,10 @@ Returns **[boolean][18]** : the result of the test
 
 [16]: #parameters-7
 
-[17]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[17]: #adddefault
 
-[18]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[18]: #parameters-8
+
+[19]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[20]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
