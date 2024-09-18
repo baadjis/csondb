@@ -6,6 +6,15 @@ eg: create collections models schemas, and add data ,find ,update and delete
 
 ## installation:
 
+the package is not available yet on npm but you can  install it from github:
+
+```sh 
+
+npm install  https://github.com/baadjis/csondb.git
+
+```
+
+
 ```sh 
  npm i @baadjis/csondb
  
@@ -289,14 +298,15 @@ A condition is a logical operation or combinaison of many logical operations.
 
 ```javavascript 
 
-firstname == 'cnd' || lastname == 'baadjis' =>{$or:[{firstname:'cnd'},{lastname:'baadjis'}]
+firstname == 'cnd' || lastname == 'baadjis' => {$or: [{firstname:'cnd'},      {lastname:'baadjis'}
+]
 }
 
 ```
 
-*Is in :
+* Is in :
 
-check if a key is in list of elements
+check if a key is in a list of elements
 
 ```javascript 
   ['cnd','cnd2'].includes(firstname) => {firstname: {$isin:['cnd','cnd1']}
