@@ -1,3 +1,4 @@
+import { DescriptorType } from "./types"
 import { isKeyWord } from "./utils/data"
 
 /**
@@ -10,7 +11,7 @@ export class Schema{
      * create a schema  with  fields definitions
      * @param description 
      */
-    constructor(description:any){
+    constructor(description:DescriptorType){
         this.description=description
         this.timestamps=false
     }
@@ -148,8 +149,9 @@ export const checkType=(data:any,key:string,description:any): boolean=>{
  * @param key {string}:the key to check
  * @returns {boolean}:
  */
-const isValidKey=(data:any ,description:any ,key:string):boolean=>{
-    return (!isKeyWord(key))&&isInSchema(key,description)&& checkType(data,key,description)
+const isValidKey=(data:any ,description:DescriptorType ,key:string):boolean=>{
+    const validated=description[key]?.validator? ((description[key].validator as CallableFunction)(data[key])):true;
+    return (!isKeyWord(key))&&isInSchema(key,description)&& checkType(data,key,description)&&validated
 }
 
 /**
@@ -180,4 +182,19 @@ export const validateCondition=(condition:any,schema:Schema): boolean=>{
     return datakeys.every((key)=> (isInSchema(key,description) && checkType(condition,key,description))||  specialKeys.includes(key) || isKeyWord(key));
     
 
+}
+
+/**
+ * add default values to data if missing
+ * @param {any} data 
+ * @param  {DescriptorType} descriptor 
+ */
+export const addDefault=(data:any,descriptor:DescriptorType):any=>{
+
+    const descKeys=Object.keys(descriptor);
+
+    for(let key of descKeys){
+       if( !Object.keys(descriptor[key]).includes('type')) addDefault(data[key],descriptor[key] as DescriptorType)
+       if(!Object.keys(data).includes(key) && descriptor[key]['default']!=undefined)  data[key] = descriptor[key].default 
+    }
 }
