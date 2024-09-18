@@ -15,3 +15,4 @@ Person.create({
 console.log(Person.find())
 console.log(Person.findManyAndUpdate({firstname:'cnd2'},{lastname:'baadji'}))
 /*console.log(Person.deleteMany({firstname:'cnd'}))*/
+console.log(isRequired)
