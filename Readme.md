@@ -39,9 +39,10 @@ npm install  https://github.com/baadjis/csondb.git
 * defining a collection :
 
 ```javascript
+
 const Collection = csondb.Collection;
 
-Person = new Collection('person');
+const Person = new Collection('person.json');
 
 
 
@@ -264,6 +265,7 @@ const Person = createModel('person',personSchema);
 we can use all functions from  collections api but all the data should be validated by schema definition or a validation error would be thrown.
 
 * Exempl:
+
 ```javascript
 
  Person.create({firstname:'cnd'});
@@ -277,22 +279,24 @@ Person.create({age:18});
 
 Conditions are used on filters for these operartions:
 
-findOne, findMany , findManyAndUpdate,findOneAndUpdate, deleteOne , deleteMany
+findOne, findMany ,     findManyAndUpdate,      findOneAndUpdate,  deleteOne ,   deleteMany
 
 A condition is a logical operation or combinaison of many logical operations.
 
 * Comparison:
 
-  fistname == 'cnd' => {firstname:'cnd'}
+```javascript  fistname == 'cnd' => {firstname:'cnd'}
   age > 12 => {age: {$gt:12} }
   age < 12 => {age: {$lt:12} }
   age >= 12 => {age: {$gte:12} }
   age <= 12 => {age:{$lte:12} }
 
+```
 * And:
 
 ```javavascript 
- firstname=='cnd' && lastname=='baadjis'=>{firstname:'cnd',lastname:'baadjis'}
+firstname=='cnd' && lastname=='baadjis'=>{firstname:'cnd',lastname:'baadjis'}
+
 
  ```
 
@@ -301,10 +305,10 @@ A condition is a logical operation or combinaison of many logical operations.
  The Or operation is followed by an array of conditions:
 
 ```javavascript 
-
 firstname == 'cnd' || lastname == 'baadjis' => {$or: [{firstname:'cnd'},      {lastname:'baadjis'}
 ]
 }
+
 
 ```
 
