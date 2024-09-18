@@ -7,3 +7,17 @@ export type OptionType={
     skip?:number,
     sort?:CompareFn<any>|Dictionary<number>
 }
+
+export interface SchemaField<T>{
+    type:Function,
+    required?:boolean,
+    default?:T
+    validator?:Function
+}
+export type DescriptorType={
+    [key:string]:SchemaField<any>|DescriptorType
+}
+
+/*const isDescriptor=(desc:any):desc is DescriptorType=>{
+
+}*/
