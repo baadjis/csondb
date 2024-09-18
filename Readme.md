@@ -274,12 +274,15 @@ Person.create({age:18});
 ```
 
 ### conditions
-Conditions are use on filters for operartions:
-findOne,findMany ,findManyAndUpdate,findOneAndUpdate.
+
+Conditions are used on filters for these operartions:
+
+findOne, findMany , findManyAndUpdate,findOneAndUpdate, deleteOne , deleteMany
 
 A condition is a logical operation or combinaison of many logical operations.
 
 * Comparison:
+
   fistname == 'cnd' => {firstname:'cnd'}
   age > 12 => {age: {$gt:12} }
   age < 12 => {age: {$lt:12} }
@@ -294,7 +297,8 @@ A condition is a logical operation or combinaison of many logical operations.
  ```
 
 * OR:
- the Or operation is followed by array of conditions:
+
+ The Or operation is followed by array of conditions:
 
 ```javavascript 
 
@@ -306,7 +310,7 @@ firstname == 'cnd' || lastname == 'baadjis' => {$or: [{firstname:'cnd'},      {l
 
 * Is in :
 
-check if a key is in a list of elements
+Check if a key is in a list of elements
 
 ```javascript 
   ['cnd','cnd2'].includes(firstname) => {firstname: {$isin:['cnd','cnd1']}
