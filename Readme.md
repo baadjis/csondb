@@ -366,7 +366,7 @@ options are used in the queries:
 
 ```javascript 
 
- // sort skip and limit
+ // sort desc  skip 1 and limit to 5
   Person.findMany({lastname:'baadjis'},{$sort:{firstname:-1},
   {$limit:5},
   {$skip:1}
