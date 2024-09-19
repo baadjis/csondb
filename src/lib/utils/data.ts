@@ -1,5 +1,5 @@
 
-import { OptionType} from '../types';
+import { DescriptorType, OptionType} from '../types';
 
 
 const KeyWords=[
@@ -143,7 +143,7 @@ export const updateDict=(dict:any,newData:any)=>{
  * @returns {any[]|Error}:list of data after applying options or Error if somme errors occured
  */
 export const applyOptions=(data:any[],options?:OptionType): any[]|Error=>{
-    const OptionsKeyWords=['limit','skip','sort'];
+    const OptionsKeyWords=['$limit','$skip','$sort'];
     if (options){
         for (let k of Object.keys(options)){
             if(!OptionsKeyWords.includes(k)) return Error(`unknown options keyword ${k}`)
@@ -152,12 +152,12 @@ export const applyOptions=(data:any[],options?:OptionType): any[]|Error=>{
     
     let start=0;
     let limit=data.length;
-    if (options?.sort){
+    if (options?.$sort){
        
-      if (typeof options.sort ==="function"){
-          data.sort((options.sort))
+      if (typeof options.$sort ==="function"){
+          data.sort((options.$sort))
       }else{
-        let sortKeys:string[]=Object.keys(options.sort)
+        let sortKeys:string[]=Object.keys(options.$sort)
         let dataKeys= Object.keys(data[0])
         for(let key of sortKeys){
           
@@ -166,11 +166,11 @@ export const applyOptions=(data:any[],options?:OptionType): any[]|Error=>{
               return Error(`key ${key} is not in data`)
           }
           
-          if (options.sort[key]!==1 && options.sort[key]!==1 ){
+          if (options.$sort[key]!==1 && options.$sort[key]!==1 ){
             
               return Error(`sort value should be 1 or -1`)
           }
-          let keyvalue=options.sort[key]
+          let keyvalue=options.$sort[key]
           data.sort((a,b)=>a[key]>b[key] ? keyvalue:(a[key]===b[key]?0:-keyvalue))
   
         }
@@ -179,11 +179,11 @@ export const applyOptions=(data:any[],options?:OptionType): any[]|Error=>{
        
     }
 
-    if (options?.skip) {
-        start=options.skip
+    if (options?.$skip) {
+        start=options.$skip
     }
-    if (options?.limit){
-       limit=options.limit
+    if (options?.$limit){
+       limit=options.$limit
     }
     data = data.slice(start,limit+start)
 
