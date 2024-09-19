@@ -149,17 +149,17 @@ describe('apply options test',()=>{
         }
     ]
     it('should return 1',()=>{
-        const val= (applyOptions(data,{limit:1}) as any[])
+        const val= (applyOptions(data,{$limit:1}) as any[])
         expect(val.length).to.be.equal(1)
     })
     it('should return true',()=>{
-        applyOptions(data,{sort:{firstname:1}})
+        applyOptions(data,{$sort:{firstname:1}})
     
         const result=data[1]['firstname']>data[0]['firstname']
         expect(result).to.be.true
     })
     it('should return 1',()=>{
-        const val= (applyOptions(data,{skip:1}) as any[])
+        const val= (applyOptions(data,{$skip:1}) as any[])
         expect(val.length).to.be.equal(1)
     })
 })
