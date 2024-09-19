@@ -9,7 +9,6 @@ eg: create collections models schemas, and add data ,find ,update and delete
 the package is not available yet on npm but you can  install it from github:
 
 ```sh 
-
 npm install  https://github.com/baadjis/csondb.git
 
 ```
@@ -17,7 +16,6 @@ npm install  https://github.com/baadjis/csondb.git
 
 ```sh 
  npm i @baadjis/csondb
- 
  ```
 
 
@@ -142,7 +140,7 @@ we can add options for findMany and find
    //sort lastname ascending skip and limit
    const datar = Person.finMany(  {firstname:  {$isin:['cnd1','cnd2','cnd3']}
       
-   }, {sort: {lastname:1 },limit:2,skip:1
+   }, {$sort: {lastname:1 },$limit:2,$skip:1
       }
    )
 
@@ -319,5 +317,59 @@ Check if a key value is in a list of elements
 ```javascript 
   ['cnd','cnd2'].includes(firstname) => {firstname: {$isin:['cnd','cnd2']}
   }
+
+```
+
+### options:
+
+options are used in the queries: 
+
+ find and  findMany
+
+   * limit
+```javascript  
+   //will return  only 3 elemnts
+   Person.find({$limit:3}) 
+   
+   
+   //should be the second argument in findMany
+   Person.findMany({firstname:'cnd'},{$limit:1})
+
+
+```
+
+ * sorting
+
+  ```javascript
+  
+    // asc sorting by firstname
+
+    Person.find({$sort:{firstname:1}})
+    //with condition
+    Person.findMany({lastname:'baadjis'},{$sort:{firstname:1}})
+
+    // desc sorting
+
+     Person.findMany({lastname:'baadjis'},{$sort:{firstname:-1}})
+  
+   ```
+* skip 
+
+```javascript 
+   // skip the firstname 
+
+   Person.findMany({lastname:'baadjis'},{$skip:3})
+
+ ```
+* combinaison 
+
+
+```javascript 
+
+ // sort skip and limit
+  Person.findMany({lastname:'baadjis'},{$sort:{firstname:-1},
+  {$limit:5},
+  {$skip:1}
+  })   
 
 ```
