@@ -133,7 +133,12 @@ describe('Collection test many',()=>{
     expect(test).to.be.true
 
 })
-
+it('should return true',()=>{
+    testCollection.update({firstname:'cnd'});
+    const data= testCollection.find() as any[]
+    const test= data.every((item:any)=>item['firstname']==='cnd');
+    expect(test).to.be.true
+})
 it('should return true',()=>{
     testCollection.delete();
     const res = testCollection.find() as any[];

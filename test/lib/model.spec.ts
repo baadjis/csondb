@@ -228,7 +228,12 @@ const TestSchema = new Schema({
     expect(test).to.be.true
 
 })
-
+it('should return true',()=>{
+    Person.update({firstname:'cnd'});
+    const data= Person.find() as any[]
+    const test= data.every((item:any)=>item['firstname']==='cnd');
+    expect(test).to.be.true
+})
 it('should return true',()=>{
     Person.delete();
     

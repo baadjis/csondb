@@ -150,6 +150,21 @@ export class Collection{
         return results
     }
     /**
+     * update all data
+     * @param {any} newData 
+     * @returns {any[]|Error}
+     */
+    update(newData:any):any[]|Error {
+        let data =readJson(this.path)
+        if(isError(data)) return data;
+        data.forEach((item)=>{
+           updateDict(item,newData)  
+        })
+        writeJson(data,this.path)
+        return data
+
+    }
+    /**
      * delete all elements from a collection
      
      */

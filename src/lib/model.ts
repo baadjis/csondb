@@ -118,6 +118,20 @@ export class Model {
         }
         return this.colletion.findManyAndUpdate(condition,newData)
     }
+
+     /**
+     * update all elements
+     * @param {any} newData: the new data for updating
+     * @returns {any[]|Error}:  list of updated items or error if some errors occured
+     */
+     update(newData:any): any[] |Error{
+
+        if(!validateCondition(newData,this.schema)) return Error('Invalid new Data entries');
+        if (this.schema.timestamps==true){
+            newData={updatedAt: new Date(),...newData}
+        }
+        return this.colletion.update(newData)
+    }
      /**
      * delete first item from the collection verifying a condition
      * @param {any} condition: the filter condition
@@ -136,7 +150,7 @@ export class Model {
         if(!validateCondition(condition,this.schema)) return Error('Invalid condition');
         return this.colletion.deleteMany(condition)
     }
-
+    
     /**
      * delete all elements from a collection
      
