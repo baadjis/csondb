@@ -20,13 +20,15 @@
         *   [Parameters][16]
     *   [findManyAndUpdate][17]
         *   [Parameters][18]
-    *   [deleteOne][19]
+    *   [update][19]
         *   [Parameters][20]
-    *   [deleteMany][21]
+    *   [deleteOne][21]
         *   [Parameters][22]
-    *   [delete][23]
-*   [createModel][24]
-    *   [Parameters][25]
+    *   [deleteMany][23]
+        *   [Parameters][24]
+    *   [delete][25]
+*   [createModel][26]
+    *   [Parameters][27]
 
 ## Model
 
@@ -45,7 +47,7 @@ insert an element to the collection
 
 *   `data` **any** : the new element
 
-Returns **(any | [Error][26])** :added data
+Returns **(any | [Error][28])** :added data
 
 ### insertMany
 
@@ -55,7 +57,7 @@ insert a list of elements to the collection
 
 *   `data` **any** : the new element
 
-Returns **([Array][27]\<any> | [Error][26])** :list of added data or Error
+Returns **([Array][29]\<any> | [Error][28])** :list of added data or Error
 
 ### find
 
@@ -65,7 +67,7 @@ find all data from the collection
 
 *   `options` **OptionType** : options to apply
 
-Returns **([Array][27]\<any> | [Error][26])** :list of data or Error if some errors occured
+Returns **([Array][29]\<any> | [Error][28])** :list of data or Error if some errors occured
 
 ### findMany
 
@@ -76,7 +78,7 @@ find a list of items from the collection verifying a condition
 *   `condition` **any** : the filter condition
 *   `options` **OptionType** : the options to apply after querying
 
-Returns **([Array][27]\<any> | [Error][26])** : list of items or Error if some errors occured
+Returns **([Array][29]\<any> | [Error][28])** : list of items or Error if some errors occured
 
 ### findOne
 
@@ -86,7 +88,7 @@ find first item from the collection verifying a condition
 
 *   `condition` **any** : the filter condition
 
-Returns **(any | [Error][26])** : data or undefined if some errors occured
+Returns **(any | [Error][28])** : data or undefined if some errors occured
 
 ### findById
 
@@ -94,9 +96,9 @@ find elemnt by id
 
 #### Parameters
 
-*   `id` **[string][28]** :the id
+*   `id` **[string][30]** :the id
 
-Returns **(any | [Error][26])** :the found item or Error
+Returns **(any | [Error][28])** :the found item or Error
 
 ### findOneAndUpdate
 
@@ -107,7 +109,7 @@ find first item from the collection verifying a condition and update it
 *   `condition` **any** : the filter condition
 *   `newData` **any** : the new data for updating
 
-Returns **(any | [Error][26])** :  index or error if some errors occured
+Returns **(any | [Error][28])** :  index or error if some errors occured
 
 ### findManyAndUpdate
 
@@ -118,7 +120,17 @@ find list of items from the collection verifying a condition and update
 *   `condition` **any** : the filter condition
 *   `newData` **any** : the new data for updating
 
-Returns **([Array][27]\<any> | [Error][26])** :  list of updated items or error if some errors occured
+Returns **([Array][29]\<any> | [Error][28])** :  list of updated items or error if some errors occured
+
+### update
+
+update all elements
+
+#### Parameters
+
+*   `newData` **any** : the new data for updating
+
+Returns **([Array][29]\<any> | [Error][28])** :  list of updated items or error if some errors occured
 
 ### deleteOne
 
@@ -128,7 +140,7 @@ delete first item from the collection verifying a condition
 
 *   `condition` **any** : the filter condition
 
-Returns **([number][29] | [Error][26])** :  index of deleted data or error if some errors occured
+Returns **([number][31] | [Error][28])** :  index of deleted data or error if some errors occured
 
 ### deleteMany
 
@@ -138,7 +150,7 @@ delete list of items from the collection verifying a condition
 
 *   `condition` **any** : the filter condition
 
-Returns **([Array][27]\<any> | [Error][26])** :  list of deleted data indexes or error if some errors occured
+Returns **([Array][29]\<any> | [Error][28])** :  list of deleted data indexes or error if some errors occured
 
 ### delete
 
@@ -150,7 +162,7 @@ create a model
 
 ### Parameters
 
-*   `name` **[string][28]** :model name
+*   `name` **[string][30]** :model name
 *   `schema` **Schema** :the schema
 
 Returns **[Model][1]** :created model
@@ -191,24 +203,28 @@ Returns **[Model][1]** :created model
 
 [18]: #parameters-8
 
-[19]: #deleteone
+[19]: #update
 
 [20]: #parameters-9
 
-[21]: #deletemany
+[21]: #deleteone
 
 [22]: #parameters-10
 
-[23]: #delete
+[23]: #deletemany
 
-[24]: #createmodel
+[24]: #parameters-11
 
-[25]: #parameters-11
+[25]: #delete
 
-[26]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error
+[26]: #createmodel
 
-[27]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[27]: #parameters-12
 
-[28]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[28]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error
 
-[29]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[29]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[30]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[31]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number

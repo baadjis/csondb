@@ -22,9 +22,11 @@
         *   [Parameters][18]
     *   [findManyAndUpdate][19]
         *   [Parameters][20]
-    *   [delete][21]
-    *   [deleteMany][22]
-        *   [Parameters][23]
+    *   [update][21]
+        *   [Parameters][22]
+    *   [delete][23]
+    *   [deleteMany][24]
+        *   [Parameters][25]
 
 ## Collection
 
@@ -32,7 +34,7 @@ Collection class
 
 ### Parameters
 
-*   `path` **[string][24]** :collection name
+*   `path` **[string][26]** :collection name
 
 ### create
 
@@ -41,7 +43,7 @@ insert an element to the collection
 #### Parameters
 
 *   `data` **any** : the new element
-*   `timestamps` **[boolean][25]** : check if timestamps (optional, default `false`)
+*   `timestamps` **[boolean][27]** : check if timestamps (optional, default `false`)
 
 Returns **any** :added data
 
@@ -52,9 +54,9 @@ insert a list of elements to the collection
 #### Parameters
 
 *   `data` **any** : the new element
-*   `timestamps` **[boolean][25]** : check if timestamps (optional, default `false`)
+*   `timestamps` **[boolean][27]** : check if timestamps (optional, default `false`)
 
-Returns **[Array][26]\<any>** :list of added data
+Returns **[Array][28]\<any>** :list of added data
 
 ### find
 
@@ -64,7 +66,7 @@ find all data from the collection
 
 *   `options` **OptionType** : options to apply
 
-Returns **([Array][26]\<any> | [Error][27])** :list of data or Error if some errors occured
+Returns **([Array][28]\<any> | [Error][29])** :list of data or Error if some errors occured
 
 ### findOne
 
@@ -74,7 +76,7 @@ find first item from the collection verifying a condition
 
 *   `condition` **any** : the filter condition
 
-Returns **(any | [Error][27])** : data or Error if some errors occured
+Returns **(any | [Error][29])** : data or Error if some errors occured
 
 ### deleteOne
 
@@ -84,7 +86,7 @@ delete first item from the collection verifying a condition
 
 *   `condition` **any** : the filter condition
 
-Returns **([number][28] | [Error][27])** :  index or error if some errors occured
+Returns **([number][30] | [Error][29])** :  index or error if some errors occured
 
 ### findById
 
@@ -92,9 +94,9 @@ find element by id from the collection
 
 #### Parameters
 
-*   `id` **[string][24]** : the id to find
+*   `id` **[string][26]** : the id to find
 
-Returns **(any | [Error][27])** :return the item or Error if not find
+Returns **(any | [Error][29])** :return the item or Error if not find
 
 ### findOneAndUpdate
 
@@ -105,7 +107,7 @@ find first item from the collection verifying a condition and update it
 *   `condition` **any** : the filter condition
 *   `newData` **any** : new data for updating
 
-Returns **(any | [Error][27])** : data or Error if some errors occured
+Returns **(any | [Error][29])** : data or Error if some errors occured
 
 ### findMany
 
@@ -116,7 +118,7 @@ find a list of items from the collection verifying a condition
 *   `condition` **any** : the filter condition
 *   `options` **OptionType** : the options to apply after querying
 
-Returns **([Array][26]\<any> | [Error][27])** : list of items or Error if some errors occured
+Returns **([Array][28]\<any> | [Error][29])** : list of items or Error if some errors occured
 
 ### findManyAndUpdate
 
@@ -127,7 +129,17 @@ find list of items from the collection verifying a condition annd update
 *   `condition` **any** : the filter condition
 *   `newData` **any** : new data for updating
 
-Returns **([Array][26]\<any> | [Error][27])** : list of modified items or Error if some errors occured
+Returns **([Array][28]\<any> | [Error][29])** : list of modified items or Error if some errors occured
+
+### update
+
+update all data
+
+#### Parameters
+
+*   `newData` **any**&#x20;
+
+Returns **([Array][28]\<any> | [Error][29])**&#x20;
 
 ### delete
 
@@ -141,7 +153,7 @@ delete a list of items from the collection verifying a condition
 
 *   `condition` **any** : the filter condition
 
-Returns **([Array][26]\<any> | [Error][27])** : list of deleted items or Error if some errors occured
+Returns **([Array][28]\<any> | [Error][29])** : list of deleted items or Error if some errors occured
 
 [1]: #collection
 
@@ -183,18 +195,22 @@ Returns **([Array][26]\<any> | [Error][27])** : list of deleted items or Error i
 
 [20]: #parameters-9
 
-[21]: #delete
+[21]: #update
 
-[22]: #deletemany
+[22]: #parameters-10
 
-[23]: #parameters-10
+[23]: #delete
 
-[24]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[24]: #deletemany
 
-[25]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[25]: #parameters-11
 
-[26]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[26]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[27]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error
+[27]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[28]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[28]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[29]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error
+
+[30]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
