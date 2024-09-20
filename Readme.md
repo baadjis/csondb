@@ -25,7 +25,7 @@ npm install  https://github.com/baadjis/csondb.git
 
  ```javascript 
  //using Node.js
- const csondb = require('@baadjiscsondb'); 
+ const csondb = require('@baadjis/csondb'); 
 
  //ES6
  import csondb from '@baaadjis/csondb'
@@ -105,7 +105,7 @@ const persons = [
 const datar = Person.insertMany(persons);
 
 ```
-* findind data:
+* finding data:
 
 ```javascript 
   // find all
@@ -130,7 +130,8 @@ const datar = Person.findById('12333fe-re233');
 
 ```
 
-we can add options for findMany and find
+we can add options for findMany and find queries
+
 ```javascript
    //limit
    const datar= Person.find({
@@ -172,7 +173,7 @@ const datar= Person.findMany({address:{
 
 ```
 
-* delete:
+* deleting:
 
 ```javascript
 //delete one
