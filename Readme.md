@@ -171,6 +171,9 @@ const datar= Person.findMany({address:{
 
 }})
 
+//update all 
+Person.update({firstname:'cnd'})
+
 ```
 
 * deleting:
