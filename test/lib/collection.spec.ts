@@ -4,8 +4,10 @@ import { Collection } from '../../src/lib/collection';
 import { readJson } from '../../src/lib/utils/files';
 
 describe('Collection test one',()=>{
-    const path=__dirname+'/testcollection.json'
-    const testCollection= new Collection(path)
+    
+    const path=__dirname+'/testcollection.json';
+    const testCollection= new Collection(path);
+
     const data={firstname:'cnd',
         lastname:'baadji',
         address:{
@@ -49,7 +51,7 @@ describe('Collection test one',()=>{
 
    // test findOneAndUpdate
    it('should return true',()=>{
-    const val=testCollection.findOneAndUpdate({firstname:'cnd'},{lasstname:'baadjic'})
+    const val=testCollection.findOneAndUpdate({firstname:'cnd'},{$set:{lasstname:'baadjic'}})
     const val1=testCollection.findOne({firstname:'cnd'})
     //check lastname changed
     const test = val['lastname']==='baadjic'
@@ -116,7 +118,7 @@ describe('Collection test many',()=>{
    })
    // find many and update
    it('should return true',()=>{
-         const datar= testCollection.findManyAndUpdate({lastname:'baadjis'},{firstname:'cndb'}) as any[];
+         const datar= testCollection.findManyAndUpdate({lastname:'baadjis'},{$set:{firstname:'cndb'}}) as any[];
          const res= testCollection.findMany({lastname:'baadjis'}) as any[];
          const test=res.every((item)=>item['firstname']==='cndb');
 
@@ -134,13 +136,19 @@ describe('Collection test many',()=>{
 
 })
 it('should return true',()=>{
-    testCollection.update({firstname:'cnd'});
+
+    testCollection.update({$set:{firstname:'cnd'}});
+
     const data= testCollection.find() as any[]
+
     const test= data.every((item:any)=>item['firstname']==='cnd');
     expect(test).to.be.true
 })
+
 it('should return true',()=>{
+
     testCollection.delete();
+
     const res = testCollection.find() as any[];
     // check that all the data is deleted
     const test=res.length===0;

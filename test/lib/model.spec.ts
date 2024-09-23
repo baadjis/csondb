@@ -116,7 +116,7 @@ const Person=createModel('testschema',TestSchema);
 
    // test findOneAndUpdate
    it('should return true',()=>{
-    const val=Person.findOneAndUpdate({firstname:'cnd'},{lasstname:'baadjic'})
+    const val=Person.findOneAndUpdate({firstname:'cnd'},{ $set:{lasstname:'baadjic'}})
     const val1=Person.findOne({firstname:'cnd'})
     //check lastname changed
     const test = val1['lastname']==='baadjic'
@@ -211,7 +211,7 @@ const TestSchema = new Schema({
    })
    // find many and update
    it('should return true',()=>{
-         const datar= Person.findManyAndUpdate({lastname:'baadjis'},{firstname:'cndb'}) as any[];
+         const datar= Person.findManyAndUpdate({lastname:'baadjis'},{$set:{firstname:'cndb'}}) as any[];
          const res= Person.findMany({lastname:'baadjis'}) as any[];
          const test=res.every((item)=>item['firstname']==='cndb');
 
@@ -229,7 +229,7 @@ const TestSchema = new Schema({
 
 })
 it('should return true',()=>{
-    Person.update({firstname:'cnd'});
+    Person.update({$set:{firstname:'cnd'}});
     const data= Person.find() as any[]
     const test= data.every((item:any)=>item['firstname']==='cnd');
     expect(test).to.be.true

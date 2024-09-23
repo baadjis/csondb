@@ -2,7 +2,7 @@
 import { findIndexWithCondition, updateDict, applyOptions, findManyWithConditon ,applyFilter, isError} from './utils/data'
 import { readJson, writeJson, updateJson, updateJsonWithArray} from './utils/files'
 
-import { OptionType } from './types'
+import { OptionType, UpdateType } from './types'
 
 /**
  * Collection class
@@ -88,10 +88,11 @@ export class Collection{
     /**
      * find first item from the collection verifying a condition and update it
      * @param {any} condition: the filter condition
-     * @param {any} newData : new data for updating
+     * @param {UpdateType} newData : new data for updating
+     * @param {boolean} timestamps: add timestamps(uppdatedAt) or no
      * @returns {any|Error}: data or Error if some errors occured
      */
-    findOneAndUpdate(condition:any,newData:any): any | Error{
+    findOneAndUpdate(condition:any,newData:UpdateType,timestamps?:boolean): any | Error{
 
         const data =readJson(this.path)
         if (isError(data)) return data
@@ -100,7 +101,7 @@ export class Collection{
         
         if (res==-1) return Error('Not Found')
 
-        updateDict(data[res], newData)
+        updateDict(data[res], newData,timestamps)
         writeJson(data,this.path)
 
         return data[res]
@@ -125,10 +126,11 @@ export class Collection{
     /**
      * find list of items from the collection verifying a condition annd update
      * @param {any} condition: the filter condition
-     * @param {any} newData : new data for updating
+     * @param {UpdateType} newData : new data for updating
+     * @param {boolean} timestamps:add timestamps(updatedAt fields) or no 
      * @returns {any[]|Error}: list of modified items or Error if some errors occured
      */
-    findManyAndUpdate(condition:any,newData:any): any[] | Error{
+    findManyAndUpdate(condition:any,newData:UpdateType,timestamps?:boolean): any[] | Error{
         let data =readJson(this.path)
         if(isError(data)) return data;
         let results:any[]=[]
@@ -137,7 +139,7 @@ export class Collection{
                    if (applyFilter(item,condition))
                    {
                     
-                        updateDict(item,newData)
+                        updateDict(item,newData,timestamps)
                         results.push(item)
                     }
                 }
@@ -152,13 +154,15 @@ export class Collection{
     /**
      * update all data
      * @param {any} newData 
+     * @param {boolean} timestamps:add timestamps(updatedAt fields) or no 
+
      * @returns {any[]|Error}
      */
-    update(newData:any):any[]|Error {
+    update(newData:UpdateType,timestamps?:boolean):any[]|Error {
         let data =readJson(this.path)
         if(isError(data)) return data;
         data.forEach((item)=>{
-           updateDict(item,newData)  
+           updateDict(item,newData,timestamps)  
         })
         writeJson(data,this.path)
         return data

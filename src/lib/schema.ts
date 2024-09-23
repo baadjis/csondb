@@ -1,4 +1,4 @@
-import { DescriptorType } from "./types"
+import { DescriptorType, UpdateType } from "./types"
 import { isKeyWord } from "./utils/data"
 
 /**
@@ -126,11 +126,25 @@ export const checkIsRequired=(data:any,description:any): boolean=>{
 export const checkType=(data:any,key:string,description:any): boolean=>{
     if (!isKeyWord(key)){
         
+        
+        if ((typeof data[key]==='object')){
+            if ( description[key]['type'] && Array.isArray(description[key]['type'])){
+                if(!Array.isArray(data[key])) return false
+                const type0=description[key]['type'][0]
+            
+                for(let item of data[key]){
+                    for (let j of  Object.keys(item)){
+                        if(!checkType(item,j,type0)) return false
+                    }
+                }
 
-        if (typeof data[key]==='object'){
-            for(let k of Object.keys(data[key])){
-               if(!checkType(data[key],k,description[key])) return false
+            }else{
+                //console.log(description[key]['type'].name)
+                for(let k of Object.keys(data[key])){
+                   if(!checkType(data[key],k,description[key])) return false
+                }
             }
+            
         }else{
             if ( description[key]!==undefined && data[key].constructor.name!=description[key]['type'].name){
                 console.error(`key should be of type:${description[key]['type'].name}`)
@@ -182,6 +196,30 @@ export const validateCondition=(condition:any,schema:Schema): boolean=>{
     return datakeys.every((key)=> (isInSchema(key,description) && checkType(condition,key,description))||  specialKeys.includes(key) || isKeyWord(key));
     
 
+}
+export const validateUpdateData=(data:UpdateType,schema:Schema)=>{
+    const datakeys=Object.keys(data)
+    for(let key of datakeys ){
+        if(key=='$set') {
+            if(!validateCondition(data[key],schema)) return false
+        }
+        else if (key=='$push'){
+            console.log(data[key])
+            const pushKey=Object.keys(data[key])[0]
+            console.log(pushKey)
+            let nestedDesc:any={};
+            for(let item of schema.description[pushKey]['type']){
+                const itemkeys=Object.keys(item)
+                nestedDesc[itemkeys[0]]=item[itemkeys[0]]
+            }
+            
+            const nestedSchema=new Schema(nestedDesc)
+            console.log(nestedSchema.description)
+            if(!validateCondition(data['$push'][pushKey],nestedSchema)) return false
+ 
+        }
+    }
+    return true
 }
 
 /**

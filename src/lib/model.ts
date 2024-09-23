@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { Collection } from "./collection"
-import { Schema, validateCondition, validateData } from "./schema"
-import { OptionType } from './types'
+import { Schema, validateCondition, validateData, validateUpdateData } from "./schema"
+import { OptionType, UpdateType } from './types'
 import { writeJson } from './utils/files'
 
 /**
@@ -89,17 +89,18 @@ export class Model {
      /**
      * find first item from the collection verifying a condition and update it 
      * @param {any} condition: the filter condition
-     * @param {any} newData: the new data for updating
+     * @param {UpdateType} newData: the new data for updating
      * @returns {any|Error}:  index or error if some errors occured
      */
-    findOneAndUpdate(condition:any,newData:any): any | Error{
+    findOneAndUpdate(condition:any,newData:UpdateType): any | Error{
 
         if(!validateCondition(condition,this.schema)) return Error('Invalid condition');
-        if(!validateCondition(newData,this.schema)) return Error('Invalid new Data entries');
-        if (this.schema.timestamps==true){
+        if(!validateUpdateData(newData,this.schema)) return Error('Invalid new Data entries');
+        /*if (this.schema.timestamps==true){
+            
             newData={updatedAt: new Date() ,...newData}
-        }
-        return this.colletion.findOneAndUpdate(condition,newData)
+        }*/
+        return this.colletion.findOneAndUpdate(condition,newData,this.schema.timestamps)
     }
 
 
@@ -112,11 +113,11 @@ export class Model {
     findManyAndUpdate(condition:any,newData:any): any[] |Error{
 
         if(!validateCondition(condition,this.schema)) return Error('Invalid condition');
-        if(!validateCondition(newData,this.schema)) return Error('Invalid new Data entries');
+        if(!validateUpdateData(newData,this.schema)) return Error('Invalid new Data entries');
         if (this.schema.timestamps==true){
             newData={updatedAt: new Date(),...newData}
         }
-        return this.colletion.findManyAndUpdate(condition,newData)
+        return this.colletion.findManyAndUpdate(condition,newData,this.schema.timestamps)
     }
 
      /**
@@ -126,11 +127,11 @@ export class Model {
      */
      update(newData:any): any[] |Error{
 
-        if(!validateCondition(newData,this.schema)) return Error('Invalid new Data entries');
+        if(!validateUpdateData(newData,this.schema)) return Error('Invalid new Data entries');
         if (this.schema.timestamps==true){
             newData={updatedAt: new Date(),...newData}
         }
-        return this.colletion.update(newData)
+        return this.colletion.update(newData,this.schema.timestamps)
     }
      /**
      * delete first item from the collection verifying a condition

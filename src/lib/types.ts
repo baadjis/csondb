@@ -19,6 +19,11 @@ export type DescriptorType={
     [key:string]:SchemaField<any>|DescriptorType
 }
 
+export type UpdateType={
+    $set?:any
+    $push?:any
+}
+
 /*const isDescriptor=(desc:any):desc is DescriptorType=>{
 
 }*/

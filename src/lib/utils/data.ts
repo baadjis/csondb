@@ -1,5 +1,5 @@
 
-import { DescriptorType, OptionType} from '../types';
+import { DescriptorType, OptionType, UpdateType} from '../types';
 
 
 const KeyWords=[
@@ -129,10 +129,23 @@ export const findManyWithConditon=(data:any[],condition:any): any[]=>{
  * @param {any} dict :the data to modify
  * @param {any} newData :the new data
  */
-export const updateDict=(dict:any,newData:any)=>{
+export const updateDict=(dict:any,newData:any,timestamps?:boolean)=>{
     let keys=Object.keys(newData);
     for(let key of keys){
-        dict[key]=newData[key]
+        const newDataKeys=Object.keys(newData[key])
+
+        if(key=='$set'){
+            for(let k of newDataKeys ){
+                dict[k]=newData[key][k]
+
+            }
+
+        }else if (key==='$push'){
+             dict[newDataKeys[0]].push(newData[key])
+        }
+        if(timestamps&& timestamps===true){
+            dict={updatedAt:Date.now(),...dict}
+        }
     }
     
 }
