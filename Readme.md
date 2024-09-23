@@ -152,7 +152,7 @@ we can add options for findMany and find queries
 ```javascript 
   // find and update one
 const datar = Person.findOneAndUpdate({firsname:'cnd'},
-  {lastname:'baadjid'}
+  {$set:{lastname:'baadjid'}}
 
   );
 
@@ -161,7 +161,7 @@ const datar = Person.findOneAndUpdate({firsname:'cnd'},
 const datar = Person.findManyAndUpdate({ firsname:{$isin: ['cnd1','cnd2']
   }
 },
-  {lastname:'baadjid'}
+  {$set:{lastname:'baadjid'}}
 
   );
 
@@ -172,7 +172,7 @@ const datar= Person.findMany({address:{
 }})
 
 //update all 
-Person.update({firstname:'cnd'})
+Person.update({$set:{firstname:'cnd'}})
 
 ```
 
@@ -287,7 +287,8 @@ A condition is a logical operation or combinaison of many logical operations.
 
 * Comparison:
 
-```javascript  fistname == 'cnd' => {firstname:'cnd'}
+```javascript 
+  fistname == 'cnd' => {firstname:'cnd'}
   age > 12 => {age: {$gt:12} }
   age < 12 => {age: {$lt:12} }
   age >= 12 => {age: {$gte:12} }
@@ -307,7 +308,9 @@ firstname=='cnd' && lastname=='baadjis'=>{firstname:'cnd',lastname:'baadjis'}
  The Or operation is followed by an array of conditions:
 
 ```javavascript 
-firstname == 'cnd' || lastname == 'baadjis' => {$or: [{firstname:'cnd'},      {lastname:'baadjis'}
+
+firstname == 'cnd' || lastname == 'baadjis' => {$or:
+[{firstname:'cnd'},      {lastname:'baadjis'}
 ]
 }
 
@@ -377,3 +380,52 @@ options are used in the queries:
   })   
 
 ```
+## updates:
+
+To update data there two possibilities:
+ * setting with keyword : $set when the fileds to update are objects or primitives types
+
+ * pushing for arrays with keyword: $push
+
+ exemple:
+
+ ```javascript 
+    const  Acount = new Schema({
+      firstname:{
+        type:String
+      },
+      amount:{
+        type:Number,
+        default:0
+      },
+      spends:{
+         type:[{sum:{type:Number},date:{type:String}}]
+      }
+    })
+
+    // update
+    //just set
+    Account.update({$set:{amount:10}})
+    //just push
+    Account.update({$push:{
+      spends:{sum:5,date:'monday'}
+      }
+      }
+
+    );
+  
+  //combine
+ 
+  Account.update({
+    $set:{
+     amount:10
+    },
+    
+    $push:{
+      spends:{sum:5,date:'monday'}
+      }
+      }
+
+    );
+    
+ ```
