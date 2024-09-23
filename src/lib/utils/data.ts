@@ -141,9 +141,7 @@ export const updateDict=(dict:any,newData:any,timestamps?:boolean)=>{
             }
 
         }else if (key==='$push'){
-            console.log(newData[key])
-            console.log(newDataKeys[0])
-            console.log(dict[newDataKeys[0]])
+           
              if (!dict[newDataKeys[0]]) dict[newDataKeys[0]]=[]
              dict[newDataKeys[0]].push(newData[key][newDataKeys[0]])
         }
