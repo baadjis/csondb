@@ -233,6 +233,6 @@ export const addDefault=(data:any,descriptor:DescriptorType):any=>{
 
     for(let key of descKeys){
        if( !Object.keys(descriptor[key]).includes('type')) addDefault(data[key],descriptor[key] as DescriptorType)
-       if(!Object.keys(data).includes(key) && descriptor[key]['default']!=undefined)  data[key] = descriptor[key].default 
+       if(!Object.keys(data).includes(key) && descriptor[key]['default']!==undefined)  data[key] = descriptor[key]['default']
     }
 }

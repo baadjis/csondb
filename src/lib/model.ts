@@ -1,6 +1,6 @@
 import fs from 'fs'
 import { Collection } from "./collection"
-import { Schema, validateCondition, validateData, validateUpdateData } from "./schema"
+import { addDefault, Schema, validateCondition, validateData, validateUpdateData } from "./schema"
 import { OptionType, UpdateType } from './types'
 import { writeJson } from './utils/files'
 
@@ -28,7 +28,7 @@ export class Model {
      */
     create(data:any): any|Error{
         if (!validateData(data,this.schema)) return Error('Ivalide data for schema')
-        
+        addDefault(data,this.schema.description)
         return this.colletion.create(data,this.schema.timestamps)
     }
     /**
@@ -41,6 +41,7 @@ export class Model {
             if (!validateData(item,this.schema)) {
                 console.log(item)
                 return Error('Ivalide data for schema')}
+            addDefault(item,this.schema.description)
         }
         return this.colletion.insertMany(data,this.schema.timestamps)
 
