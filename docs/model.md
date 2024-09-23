@@ -107,7 +107,7 @@ find first item from the collection verifying a condition and update it
 #### Parameters
 
 *   `condition` **any** : the filter condition
-*   `newData` **any** : the new data for updating
+*   `newData` **UpdateType** : the new data for updating
 
 Returns **(any | [Error][28])** :  index or error if some errors occured
 
