@@ -399,7 +399,8 @@ To update data there two possibilities:
         default:0
       },
       spends:{
-         type:[{sum:{type:Number},date:{type:String}}]
+         type:[{sum:{type:Number},date:{type:String}}],
+         default:[]
       }
     })
 
