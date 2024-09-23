@@ -383,6 +383,7 @@ options are used in the queries:
 ## updates:
 
 To update data there are two possibilities:
+
  * setting with keyword : $set when the fileds to update are objects or primitives types
 
  * pushing for arrays with keyword: $push
