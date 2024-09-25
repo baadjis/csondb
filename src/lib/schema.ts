@@ -213,6 +213,12 @@ export const validateCondition=(condition:any,schema:Schema): boolean=>{
     
 
 }
+/**
+ * validate the new data before updating
+ * @param {UpdateType} data : the data for updating
+ * @param {Schema} schema :the schema
+ * @returns 
+ */
 export const validateUpdateData=(data:UpdateType,schema:Schema)=>{
     const datakeys=Object.keys(data)
     for(let key of datakeys ){
@@ -220,15 +226,11 @@ export const validateUpdateData=(data:UpdateType,schema:Schema)=>{
             if(!validateCondition(data[key],schema)) return false
         }
         else if (key=='$push'){
-            console.log(data[key])
+            //console.log(data[key])
             const pushKey=Object.keys(data[key])[0]
-            console.log(pushKey)
+            //console.log(pushKey)
+
             let nestedDesc=schema.description[pushKey]['type'][0];
-            /*for(let item of schema.description[pushKey]['type']){
-                const itemkeys=Object.keys(item)
-                nestedDesc[itemkeys[0]]=item[itemkeys[0]]
-            }*/
-            
             const nestedSchema=new Schema(nestedDesc)
             console.log(nestedSchema.description)
             if(!validateCondition(data['$push'][pushKey],nestedSchema)) return false
