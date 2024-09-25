@@ -30,15 +30,31 @@ export class Schema{
 export const isInSchema=(key:string,description:any): boolean=>{
     /*chek if a key in the schema description*/
     if (!isKeyWord(key)){
+
     const schemakeys=Object.keys(description)
+
     if (schemakeys.includes(key)){
 
     let keys=Object.keys(description[key])
+
     if (! (keys.includes('type'))){
+
         for(let k of keys){
+
             if (!isInSchema(k,description[key])) return false
+
             }  
+
      }else{
+        // type is array
+        if(Array.isArray(description[key]['type'])){
+            const keyType=description[key]['type'][0];
+            const keyTypeKeys=Object.keys(keyType)
+            for(let k of keyTypeKeys){
+                if (!isInSchema(k,keyType)) return false
+
+            }
+        }
         return true
         
      }}else{
@@ -207,11 +223,11 @@ export const validateUpdateData=(data:UpdateType,schema:Schema)=>{
             console.log(data[key])
             const pushKey=Object.keys(data[key])[0]
             console.log(pushKey)
-            let nestedDesc:any={};
-            for(let item of schema.description[pushKey]['type']){
+            let nestedDesc=schema.description[pushKey]['type'][0];
+            /*for(let item of schema.description[pushKey]['type']){
                 const itemkeys=Object.keys(item)
                 nestedDesc[itemkeys[0]]=item[itemkeys[0]]
-            }
+            }*/
             
             const nestedSchema=new Schema(nestedDesc)
             console.log(nestedSchema.description)
