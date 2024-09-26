@@ -141,9 +141,11 @@ export const updateDict=(dict:any,newData:any,timestamps?:boolean)=>{
             }
 
         }else if (key==='$push'){
-           
-             if (!dict[newDataKeys[0]]) dict[newDataKeys[0]]=[]
-             dict[newDataKeys[0]].push(newData[key][newDataKeys[0]])
+             for(let k of newDataKeys){
+                if (!dict[k]) dict[k]=[]
+                dict[k].push(newData[key][k])
+             }
+            
         }
         if(timestamps&& timestamps===true){
             dict={updatedAt:Date.now(),...dict}

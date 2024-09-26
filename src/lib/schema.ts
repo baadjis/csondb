@@ -142,8 +142,8 @@ export const checkIsRequired=(data:any,description:any): boolean=>{
 export const checkType=(data:any,key:string,description:any): boolean=>{
     if (!isKeyWord(key)){
         
-        
         if ((typeof data[key]==='object')){
+
             if ( description[key]['type'] && Array.isArray(description[key]['type'])){
                 if(!Array.isArray(data[key])) return false
                 const type0=description[key]['type'][0]
@@ -162,6 +162,7 @@ export const checkType=(data:any,key:string,description:any): boolean=>{
             }
             
         }else{
+
             if ( description[key]!==undefined && data[key].constructor.name!=description[key]['type'].name){
                 console.error(`key should be of type:${description[key]['type'].name}`)
                 return false
@@ -213,12 +214,14 @@ export const validateCondition=(condition:any,schema:Schema): boolean=>{
     
 
 }
+
 /**
  * validate the new data before updating
  * @param {UpdateType} data : the data for updating
  * @param {Schema} schema :the schema
  * @returns 
  */
+
 export const validateUpdateData=(data:UpdateType,schema:Schema)=>{
     const datakeys=Object.keys(data)
     for(let key of datakeys ){
@@ -232,7 +235,7 @@ export const validateUpdateData=(data:UpdateType,schema:Schema)=>{
 
             let nestedDesc=schema.description[pushKey]['type'][0];
             const nestedSchema=new Schema(nestedDesc)
-            console.log(nestedSchema.description)
+            //console.log(nestedSchema.description)
             if(!validateCondition(data['$push'][pushKey],nestedSchema)) return false
  
         }
