@@ -130,7 +130,7 @@ const datar = Person.findById('12333fe-re233');
 
 ```
 
-we can add options for findMany and find queries
+we can add options for **findMany** and **find** queries
 
 ```javascript
    //limit
@@ -150,11 +150,11 @@ we can add options for findMany and find queries
 * updating data:
 
 ```javascript 
-  // find and update one
-const datar = Person.findOneAndUpdate({firsname:'cnd'},
-  {$set:{lastname:'baadjid'}}
-
-  );
+// find and update one
+const datar = Person.findOneAndUpdate(
+{firsname:'cnd'},
+{$set:{lastname:'baadjid'}}
+);
 
 //find many and update
 
@@ -163,7 +163,7 @@ const datar = Person.findManyAndUpdate({ firsname:{$isin: ['cnd1','cnd2']
 },
   {$set:{lastname:'baadjid'}}
 
-  );
+);
 
 //nested data 
 const datar= Person.findMany({address:{
@@ -172,7 +172,9 @@ const datar= Person.findMany({address:{
 }})
 
 //update all 
-Person.update({$set:{firstname:'cnd'}})
+Person.update(
+{$set:{firstname:'cnd'}}
+)
 
 ```
 
@@ -259,7 +261,7 @@ const personSchema = new Schema({
            required:true
        }
     }
-})
+});
 personSchema.setTimestamps(true)
 const Person = createModel('person',personSchema);
 
@@ -281,11 +283,12 @@ Person.create({age:18});
 
 Conditions are used on filters for these operartions:
 
-findOne, findMany ,     findManyAndUpdate,      findOneAndUpdate,  deleteOne ,   deleteMany
+**findOne**, **findMany** ,     **findManyAndUpdate**,      **findOneAndUpdate**,  **deleteOne** ,   **deleteMany**
 
 A condition is a logical operation or combinaison of many logical operations.
+this how we will encode js conditions:
 
-* Comparison:
+* Comparing:
 
 ```javascript 
   fistname == 'cnd' => {firstname:'cnd'}
@@ -305,10 +308,9 @@ firstname=='cnd' && lastname=='baadjis'=>{firstname:'cnd',lastname:'baadjis'}
 
 * OR:
 
- The Or operation is followed by an array of conditions:
+ The **Or** operation is followed by an array of conditions:
 
 ```javavascript 
-
 firstname == 'cnd' || lastname == 'baadjis' => {$or:
 [{firstname:'cnd'},      {lastname:'baadjis'}
 ]
@@ -322,8 +324,12 @@ firstname == 'cnd' || lastname == 'baadjis' => {$or:
 Check if a key value is in a list of elements
 
 ```javascript 
-  ['cnd','cnd2'].includes(firstname) => {firstname: {$isin:['cnd','cnd2']}
+
+['cnd','cnd2'].includes(firstname) => {
+    firstname: {
+    $isin:['cnd','cnd2']
   }
+}
 
 ```
 
@@ -331,7 +337,7 @@ Check if a key value is in a list of elements
 
 options are used in the queries: 
 
- find and  findMany
+ **find** and  **findMany**
 
    * limit
 ```javascript  
@@ -363,9 +369,9 @@ options are used in the queries:
 * skip 
 
 ```javascript 
-   // skip the firstname 
+// skip 3 first elements
 
-   Person.findMany({lastname:'baadjis'},{$skip:3})
+Person.findMany({lastname:'baadjis'},{$skip:3})
 
  ```
 * combinaison 
@@ -384,14 +390,14 @@ options are used in the queries:
 
 To update data there are two possibilities:
 
- * setting with keyword : $set when the fileds to update are objects or primitives types
+ * setting with keyword : **$set** when the fileds to update are objects or primitives types
 
- * pushing for arrays with keyword: $push
+ * pushing for arrays with keyword: **$push**
 
  exemple:
 
  ```javascript 
-    const  Acount = new Schema({
+  const  Acount = new Schema({
       firstname:{
         type:String
       },
@@ -405,9 +411,9 @@ To update data there are two possibilities:
       }
     })
 
-    // update
-    //just set
-    Account.update({$set:{amount:10}})
+// update
+//just set
+Account.update({$set:{amount:10}})
     //just push
     Account.update({$push:{
       spends:{sum:5,date:'monday'}
@@ -416,18 +422,17 @@ To update data there are two possibilities:
 
     );
   
-  //combine
- 
-  Account.update({
-    $set:{
+//combine
+Account.update({
+  $set:{
      amount:10
     },
-    
-    $push:{
-      spends:{sum:5,date:'monday'}
+  $push:{
+      spends:{
+      sum:5,
+      date:'monday'
       }
-      }
-
-    );
+    }
+    });
     
  ```
