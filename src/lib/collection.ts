@@ -207,4 +207,17 @@ export class Collection{
         }
         return results
     }
+
+    /**
+     * count number of elements given the condition
+     * @param {any} condition 
+     * @returns {number Error}
+     */
+    count(condition:any=null):number|Error{
+        const data =readJson(this.path) ;
+        if (isError(data)) return data;
+        if (condition===null) return data.length;
+        let res=findManyWithConditon(data,condition);
+        return  res.length;
+    }
 }

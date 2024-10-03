@@ -144,6 +144,20 @@ it('should return true',()=>{
     const test= data.every((item:any)=>item['firstname']==='cnd');
     expect(test).to.be.true
 })
+//test count
+it('should return true',()=>{
+    const data= testCollection.find() as any[]
+    const counts = testCollection.count()
+    const test= counts==data.length
+    expect(test).to.be.true
+})
+
+it('should return true',()=>{
+    const data= testCollection.findMany({firstname:'cnd'}) as any[]
+    const counts = testCollection.count({firstname:'cnd'})
+    const test= counts==data.length
+    expect(test).to.be.true
+})
 
 it('should return true',()=>{
 

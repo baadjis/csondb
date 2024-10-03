@@ -2,7 +2,6 @@ import fs from 'fs'
 import { Collection } from "./collection"
 import { addDefault, Schema, validateCondition, validateData, validateUpdateData } from "./schema"
 import { OptionType, UpdateType } from './types'
-import { writeJson } from './utils/files'
 
 /**
  * class for creating models
@@ -39,7 +38,7 @@ export class Model {
     insertMany(data: any[]): any[]|Error{
         for(let item of data){
             if (!validateData(item,this.schema)) {
-                console.log(item)
+            
                 return Error('Ivalide data for schema')}
             addDefault(item,this.schema.description)
         }
@@ -161,7 +160,18 @@ export class Model {
         this.colletion.delete()
     }
 
+   /**
+     * count number of element verifying a condition
+     * @param {any} condition: the filter condition
+     * @returns {number|Error}: list of items or Error if some errors occured
+     */
+    count(condition:any=null): number| Error{
+    if(condition!==null && !validateCondition(condition,this.schema)) return Error('Invalid condition')
+    return this.colletion.count(condition)
 }
+
+}
+
 /**
  * create a model
  * @param {string} name :model name
@@ -183,3 +193,4 @@ export const createModel=(name:string,schema:Schema): Model=>{
     const collection = new Collection(path)
     return new Model(collection,schema)
 }
+
