@@ -3,12 +3,12 @@ import { DescriptorType, OptionType, UpdateType} from '../types';
 
 
 const KeyWords=[
+        '$lt',
         '$gt',
         '$lte',
         '$gte',
         '$isin',
-        '$or'
-]
+        '$or']
 /**
  * check if key is from KeyWords list
  * @param {string} key : the key to check
